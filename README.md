@@ -78,7 +78,7 @@ class NewComponentWrapper:
    ```
 5. **Environment Variables**
 
-   Create a .env file in the project root and set the AZURE_OPENAI_API_KEY.
+   Create a .env file in the project root and set the `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_CHAT_ENDPOINT` and `AZURE_OPENAI_CHAT_DEPLOYMENT`.
 
    Steps to obtain the API key:
    1. Register an account on Azure.
