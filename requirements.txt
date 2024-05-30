@@ -1,1 +1,2 @@
 pyrit
+better_profanity
