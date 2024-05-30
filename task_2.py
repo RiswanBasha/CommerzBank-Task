@@ -1,10 +1,17 @@
+corpus = """
+Once upon a time, in a land far, far away, there was a small village surrounded by dense forests. 
+The villagers were known for their kindness and hospitality. 
+Every year, they held a grand festival to celebrate the harvest season. 
+People from neighboring towns would come to join in the festivities, bringing with them delicious food and fascinating stories. 
+Children would play games in the village square, while adults danced and sang late into the night.
+The village had a wise old man who was revered by all. He had lived through many seasons and seen the village grow and prosper.
+One day, a stranger arrived in the village. He carried with him an air of mystery and spoke of lands beyond the mountains.
+The villagers were intrigued by his tales and welcomed him with open arms. 
+As the days passed, the stranger shared his knowledge and skills, helping the villagers in many ways.
+In return, the villagers taught him their customs and traditions. 
+The stranger soon became an integral part of the village, and they all lived happily ever after.
 """
-Note:
-The following code simulates the use of Azure OpenAI services using the PyRIT framework for AI red teaming tasks. 
-I do not currently have an Azure OpenAI service subscription. Therefore, this code is based on the assumption 
-of having the necessary API keys and endpoints configured for Azure OpenAI services. Adjustments might be needed 
-to match the actual service specifications and configurations when access to the Azure OpenAI service is available.
-"""
+
 import openai
 import logging
 import os
@@ -17,6 +24,9 @@ from pyrit.score import SelfAskScorer
 from pathlib import Path
 from textwrap import dedent
 from better_profanity import profanity
+import random
+import markovify
+from faker import Faker
 
 # Load environment variables
 load_dotenv()
@@ -32,6 +42,12 @@ PYRIT_LOG_FILE = "pyrit_interactions.log"
 
 # Initialize OpenAI API
 openai.api_key = AZURE_OPENAI_CHAT_KEY
+
+# Initialize Faker for generating random text
+faker = Faker()
+
+# Build the Markov model from the default corpus
+text_model = markovify.Text(corpus)
 
 # Attacker Chatbot (Red Team LLM)
 class AttackerChatbot:
@@ -80,6 +96,16 @@ class NewComponentWrapper:
     def send_prompt_to_target(self, prompt):
         return self.process_prompt(prompt)
 
+# Generate random sentences
+def generate_random_sentence():
+    # Use Markovify to generate a random sentence
+    markov_sentence = text_model.make_sentence()
+    
+    # Use Faker to generate a random sentence
+    faker_sentence = faker.sentence()
+    
+    # Randomly choose between Markovify and Faker sentences
+    return random.choice([markov_sentence, faker_sentence])
 
 # Simulate the communication
 def simulate_communication():
@@ -105,15 +131,19 @@ def simulate_communication():
         chat_target=red_teaming_llm,
     )
 
-    with RedTeamingOrchestrator(
-        attack_strategy=attacker.get_attack_strategy(),
-        red_teaming_chat=red_teaming_llm,
-        prompt_target=new_component,  # Insert new component in the flow
-        initial_red_teaming_prompt="Begin conversation",
-        scorer=scorer,
-        verbose=True,
-    ) as red_teaming_orchestrator:
-        red_teaming_orchestrator.apply_attack_strategy_until_completion(max_turns=5)
+    for _ in range(1000):
+        random_sentence = generate_random_sentence()
+        
+        if random_sentence:  # Ensure the sentence is not None
+            with RedTeamingOrchestrator(
+                attack_strategy=attacker.get_attack_strategy(),
+                red_teaming_chat=red_teaming_llm,
+                prompt_target=new_component,  # Insert new component in the flow
+                initial_red_teaming_prompt=random_sentence,
+                scorer=scorer,
+                verbose=True,
+            ) as red_teaming_orchestrator:
+                red_teaming_orchestrator.apply_attack_strategy_until_completion(max_turns=5)
 
 if __name__ == "__main__":
     simulate_communication()
