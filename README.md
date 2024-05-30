@@ -32,7 +32,7 @@ The script initializes the attacker and target chatbots, sets up the PyRIT frame
 In this task, we extend the setup by adding a new component between the target LLM and the PyRIT framework. This component evaluates and preprocesses the prompts before they reach the target LLM.
 
 ### New Component Wrapper
-The `NewComponentWrapper` class processes the prompt, detects abusive content, and modifies it to ensure it is appropriate before passing it to the target LLM.
+The [NewComponentWrapper](https://github.com/RiswanBasha/CommerzBank-Task/blob/main/task_2.py#L54) class processes the prompt, detects abusive content, and modifies it to ensure it is appropriate before passing it to the target LLM.
 
 ```python
 class NewComponentWrapper:
@@ -67,23 +67,23 @@ class NewComponentWrapper:
    cd [folder]
    ```
 2. **Set Up a Virtual Environment**
-   ```
-   python -m venv venv
-   venv\Scripts\activate
-   ```
-   or
+   - pyrit supports only in 3.11+
     ```
-   conda create --name myenv python=3.11 #since pyrit supports only in 3.11+
+   conda create -y -n myenv python=3.11
    conda activate myenv
    ```
-3. **Install Dependencies**
+4. **Install Dependencies**
    ```
    pip install -r requirements.txt
    ```
-4. **Environment Variables**
+5. **Environment Variables**
 
    Create a .env file in the project root and set the AZURE_OPENAI_API_KEY.
 
    Steps to obtain the API key:
    1. Register an account on Azure.
    2. Get your API key for the pay-as-you-go service based on the usage of tokens and embeddings.
+
+
+**Note**
+The following code simulates the use of Azure OpenAI services using the PyRIT framework for AI red teaming tasks. I do not currently have an Azure OpenAI service subscription. Therefore, this code is based on the assumption of having the necessary API keys and endpoints configured for Azure OpenAI services. Adjustments might be needed to match the actual service specifications and configurations when access to the Azure OpenAI service is available.
