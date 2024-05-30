@@ -87,3 +87,5 @@ class NewComponentWrapper:
 
 **Note**
 The following code simulates the use of Azure OpenAI services using the PyRIT framework for AI red teaming tasks. I do not currently have an Azure OpenAI service subscription. Therefore, this code is based on the assumption of having the necessary API keys and endpoints configured for Azure OpenAI services. Adjustments might be needed to match the actual service specifications and configurations when access to the Azure OpenAI service is available.
+
+For more Information about pyRIT: https://github.com/Azure/PyRIT/blob/main/doc/how_to_guide.ipynb
