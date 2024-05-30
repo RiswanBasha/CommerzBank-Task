@@ -72,7 +72,7 @@ Output: Chatbot responds appropriately, avoiding stereotypes.
 Analysis: The model handled the adversarial input correctly.
 ```
 
-### New Component Wrapper
+## New Component Wrapper
 The [NewComponentWrapper](https://github.com/RiswanBasha/CommerzBank-Task/blob/main/task_2.py#L54) class processes the prompt, detects abusive content, and modifies it to ensure it is appropriate before passing it to the target LLM.
 
 ```python
