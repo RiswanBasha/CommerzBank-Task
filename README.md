@@ -31,7 +31,7 @@ The script initializes the attacker and target chatbots, sets up the PyRIT frame
 ## Task 2: Integrating an Additional Component
 In this task, we extend the setup by adding a new component between the target LLM and the PyRIT framework. This component evaluates and preprocesses the prompts before they reach the target LLM. Additionally, we run the simulation for 1000 iterations. Each iteration involves generating a new random sentence, processing it through the NewComponentWrapper, and using it to initiate a conversation following the predefined attack strategy. This extensive iteration ensures thorough testing by exposing the model to a diverse range of inputs, including benign, adversarial, and edge cases. It helps identify weaknesses, evaluates the model's robustness, and provides statistically significant results. The interaction logs and scoring offer comprehensive insights into the model's performance, highlighting areas for improvement and ensuring consistent and reliable behavior across various scenarios.
 
-## Example Scenario with Outputs:
+### Example Scenario with Outputs:
 ```
 Iteration 1:
 Input: "The villagers were known for their kindness and hospitality."
@@ -99,7 +99,7 @@ class NewComponentWrapper:
     def send_prompt_to_target(self, prompt):
         return self.process_prompt(prompt)
 ```
-## Summary of Benefits:
+### Summary of Benefits:
 
 - Improved Model Quality: Identifying and addressing weaknesses improves the overall quality and robustness of the model.
 - Increased Reliability: The model becomes more reliable across a wide range of inputs and scenarios.
